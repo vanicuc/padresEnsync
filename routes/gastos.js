@@ -3,7 +3,7 @@ var router = express.Router();
 const db = require("../model/helper");
 
 //NO ME FUNCIONA EL GUARD!!!!!
-const gastoMustExist = require("../guards/gastoMustExist");
+// const gastoMustExist = require("../guards/gastoMustExist");
 
 
 
