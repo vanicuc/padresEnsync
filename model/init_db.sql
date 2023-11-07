@@ -3,7 +3,7 @@
 --
 
 SET foreign_key_checks = 0;
-DROP TABLE if exists gastos_parentales;
+DROP TABLE if exists gastos;
 SET foreign_key_checks = 1;
 
 --
@@ -11,11 +11,27 @@ SET foreign_key_checks = 1;
 --
 
 
-CREATE TABLE gastos_parentales (
+CREATE TABLE gastos (
   id INT NOT NULL AUTO_INCREMENT,
-  date VARCHAR(40) not null,
+  dateExpense DATE not null,
   description VARCHAR(400) not null,
-  total int not null,
-  aproved tinyint(1),
+  total  DECIMAL(8,2) not null,
+  userId int(11) not null,
+  approved tinyint(1),
   PRIMARY KEY (id)
 );
+
+-- CREATE TABLE `lista`(
+--     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
+-- );
+-- CREATE TABLE `calendario`(
+--     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
+-- );
+-- CREATE TABLE `gastos_parentales`(
+--     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+--     `data` DATE MOT NULL,
+--     `description` VARCHAR(400) NOT NULL,
+--     `TOTAL` INT NOT NULL,
+--     `pay`  NOT NULL,
+--     `approved` TINYINT
+-- );
