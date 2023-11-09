@@ -3,7 +3,7 @@ var router = express.Router();
 const db = require("../model/helper");
 
 //NO ME FUNCIONA EL GUARD!!!!!
-// const gastoMustExist = require("../guards/gastoMustExist");
+const gastoMustExist = require("../guards/gastoMustExist");
 
 
 
@@ -27,14 +27,15 @@ const gastos = results.data;
       res.status(404).send("No se encontraron gastos.");
     }
   } catch (err) {
-    res.status(500).send(err);
+    console.error("Error al agregar gasto:", err);
+    res.status(500).send(err.message);
   }
 });
 
 
 // GET one gasto
 
-router.get("/:id", function(req, res) {
+router.get("/:id",  gastoMustExist, function(req, res) {
   const { id } = req.params;
   db(`SELECT * FROM gastos WHERE id = ${id};`)
     .then(results => {
@@ -61,16 +62,16 @@ router.get("/:id", function(req, res) {
 
 // INSERT a new gasto into the DB
 router.post("/", async function(req, res) {
-  const {dateExpense, description, total, userId } = req.body;
-
-   // Convierte la fecha en formato ISO 8601 a "YYYY-MM-DD"
-  //  const dateObj = new Date(dateExpense);
-  //  const formattedDate = dateObj.toISOString().split('T')[0];
+  
+  const {text } = req.body;
+  const { dateExpense, description, total, userId } = text;
  
   try {
     await db(
-      `INSERT INTO gastos (dateExpense, description, total, userId) VALUES ('${dateExpense}', '${description}', '${total}', '${userId}');`
-    );
+      // `INSERT INTO gastos (dateExpense, description, total, userId) VALUES ('${dateExpense}', '${description}', '${total}', '${userId}');`
+      `INSERT INTO gastos (dateExpense, description, total, userId, approved) VALUES ('${text.dateExpense}', '${text.description}', ${text.total}, ${text.userId}, 0 );`
+    
+      );
     const results = await db("SELECT * FROM gastos");
 
     res.status(201).send({ message: "New expenses created correctly" });
@@ -81,7 +82,8 @@ router.post("/", async function(req, res) {
 
 
 
-router.put("/:id", async (req, res) => {
+
+router.put("/:id",  gastoMustExist, async (req, res) => {
   const id = req.params.id;
   const { total, description, dateExpense } = req.body;
   const updateFields = [];
@@ -115,7 +117,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // DELETE a gasto from the DB
-router.delete("/:id", async function(req, res, next) {
+router.delete("/:id", gastoMustExist,  async function(req, res, next) {
   const { id } = req.params;
   try {
     await db(`DELETE FROM gastos WHERE id = ${id} ;`);
