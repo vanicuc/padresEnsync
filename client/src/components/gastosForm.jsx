@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 
 
-function GastosForm(props) {
+function GastosForm({onGastoAdded}) {
 
-// //state data siempre primero data con dos elementos uno la const y tro lo que se va a cambiar
+// const [error, setError] = useState("");
 const [gastos, setGastos] = useState({
     dateExpense: "",
     description: "",
     total: 0,
-    userId: 0,
+    userId: 1,
     approved: false
 }); 
     
@@ -16,6 +16,7 @@ const [gastos, setGastos] = useState({
 const handleInputChange = (event) => {
     const value = event.target.value;
     const name = event.target.name;
+    console.log(value)
 
   //aca decimeos como va a cambiar la const igual a project["i"] i igual valor
   setGastos((state) => ({
@@ -24,9 +25,18 @@ const handleInputChange = (event) => {
           }));
 };
 
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
         e.preventDefault();
-        addGastos();
+        await addGastos();
+        onGastoAdded();
+        setGastos({
+          dateExpense: "",
+          description: "",
+          total: 0,
+          userId: 1,
+          approved: false
+        });
+      
 };
 
 
@@ -38,7 +48,7 @@ const addGastos = async () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ text: gastos }), // Cuerpo de la solicitud en formato JSON
+      body: JSON.stringify(gastos), // Cuerpo de la solicitud en formato JSON
     });
 
     if (response.ok) {
@@ -52,7 +62,6 @@ const addGastos = async () => {
   }
 };
   
-
 
 
   return (
@@ -87,12 +96,11 @@ const addGastos = async () => {
         </label>
 
         <label>
-           Responsable pago
-            <input
-                name="userId"
-                value={gastos.userId}
-                onChange={(e) => handleInputChange(e)}
-            />
+          Responsable pago
+          <select name="userId" onChange={handleInputChange} value={gastos.userId}>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          </select>
         </label>
 
         <button>Add</button>
@@ -102,5 +110,3 @@ const addGastos = async () => {
 }
 
 export default GastosForm;
-
-

@@ -63,13 +63,13 @@ router.get("/:id",  gastoMustExist, function(req, res) {
 // INSERT a new gasto into the DB
 router.post("/", async function(req, res) {
   
-  const {text } = req.body;
-  const { dateExpense, description, total, userId } = text;
+  const { dateExpense, description, total, userId } =  req.body;
  
   try {
     await db(
       // `INSERT INTO gastos (dateExpense, description, total, userId) VALUES ('${dateExpense}', '${description}', '${total}', '${userId}');`
-      `INSERT INTO gastos (dateExpense, description, total, userId, approved) VALUES ('${text.dateExpense}', '${text.description}', ${text.total}, ${text.userId}, 0 );`
+      `INSERT INTO gastos (dateExpense, description, total, userId, approved)
+       VALUES ('${dateExpense}', '${description}', ${total}, ${userId}, 0 );`
     
       );
     const results = await db("SELECT * FROM gastos");
