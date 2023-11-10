@@ -8,7 +8,14 @@ export default function GastosPage() {
   
   const [gastosData, setGastosData] = useState([]);
   const [error, setError] = useState("");
-  
+  const [ShowgastosData, setShowGastosData] = useState({
+    dateExpense: "",
+    description: "",
+    total: 0,
+    userId: 1,
+    approved: false
+    
+});
   useEffect(() => {
     getGastosData();
   }, []);
@@ -115,17 +122,17 @@ return (
         ))} 
       </div>
 
+      
+      <Outlet >
 
       <ZoomGastos 
-            GetZoomGastos={handlegastoClick }
+            // GetZoomGastos={getGastosData }
+            GetZoomGastos={() =>handlegastoClick(id) }
             />
-      <Link to="/Gastos/ZoomGastos" >
-                
-      </Link>
-      <Outlet />
-  
-  </>
+      </Outlet >
+  {/* <Link to="/Gastos/ZoomGastos" ></Link> */}
 
+  </>
   
   );
 };

@@ -9,7 +9,7 @@ export default function ZoomGastos(GetZoomGastos) {
     const { id } = useParams();
    
     useEffect(() => {
-        getEachGastosData();
+      GetZoomGastos();
       }, [id]);
  
     // const getEachGastosData = async (id) => {
@@ -37,7 +37,7 @@ return (
     
 
         <div className="list-group mt-4 shadow">
-        {gastosData.map((g) => (
+        {/* {gastosData.map((g) => ( */}
             <div >
                     <p>Fecha = {gastosData.dateExpense}</p>
                     <p>Descripción = {gastosData.description}</p>
@@ -51,7 +51,7 @@ return (
                             />
                     </p>
             </div>
-        ))} 
+        {/* ))}  */}
 
          </div>
  
