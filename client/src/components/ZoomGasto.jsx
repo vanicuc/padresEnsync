@@ -2,34 +2,34 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 
-export default function EachGastos() {
+export default function ZoomGastos(GetZoomGastos) {
 
     const [gastosData, setGastosData] = useState([]);
-    const [error, setError] = useState("");
+    // const [error, setError] = useState("");
     const { id } = useParams();
    
     useEffect(() => {
         getEachGastosData();
       }, [id]);
  
-    const getEachGastosData = async (id) => {
-        try {
-          const response = await fetch(`/api/gastos/${id}`, {
-            method: "GET",
-          });
+    // const getEachGastosData = async (id) => {
+    //     try {
+    //       const response = await fetch(`/api/gastos/${id}`, {
+    //         method: "GET",
+    //       });
       
-          if (response.ok) {
-            const gastoData = await response.json(); 
-            setGastosData(gastoData);
-            setError("");
-          } else {
-            console.log(`Error del servidor: ${response.status} : ${response.statusText}`);
-            throw new Error(`Error del servidor: ${response.status} : ${response.statusText}`);
-          }
-        } catch (err) {
-          setError(err.message);
-        }
-      };
+    //       if (response.ok) {
+    //         const gastoData = await response.json(); 
+    //         setGastosData(gastoData);
+    //         setError("");
+    //       } else {
+    //         console.log(`Error del servidor: ${response.status} : ${response.statusText}`);
+    //         throw new Error(`Error del servidor: ${response.status} : ${response.statusText}`);
+    //       }
+    //     } catch (err) {
+    //       setError(err.message);
+    //     }
+    //   };
 
     
 return (
@@ -64,10 +64,4 @@ return (
 
 
 
- // const [showGastosData, setshowGastosData] = useState({
-    //     dateExpense: "",
-    //     description: "",
-    //     total: 0,
-    //     userId: 1,
-    //     approved: false
-    // });
+ 
