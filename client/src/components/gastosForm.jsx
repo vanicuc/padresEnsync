@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+// import './gastosForm.css'
 
 function GastosForm({onGastoAdded}) {
 
@@ -25,10 +25,14 @@ const handleInputChange = (event) => {
           }));
 };
 
+// Maneja el envío del formulario para agregar un nuevo gasto
 const handleSubmit = async (e) => {
         e.preventDefault();
+        // Realiza una solicitud para agregar un nuevo gasto a la API
         await addGastos();
+        // Llama a la función proporcionada para recargar los datos de los gastos
         onGastoAdded();
+        // Reinicia el estado del formulario
         setGastos({
           dateExpense: "",
           description: "",
@@ -40,7 +44,7 @@ const handleSubmit = async (e) => {
 };
 
 
-
+// Agrega un nuevo gasto mediante una solicitud a la API
 const addGastos = async () => {
   try {
     const response = await fetch("/api/gastos", {
@@ -65,47 +69,51 @@ const addGastos = async () => {
 
 
   return (
-    <div className="list-group mt-4 shadow">
+  
+    
+    <div className="gastos-form-container">
       <form onSubmit={handleSubmit}>
-        <label>
+        <label className=" formFecha">
           Fecha
-            <input
-                type="date"
-                name="dateExpense"
-                value={gastos.dateExpense}
-                onChange={(e) => handleInputChange(e)}
-            />
+                <input
+                    type="date"
+                    name="dateExpense"
+                    value={gastos.dateExpense}
+                    onChange={(e) => handleInputChange(e)}
+                />
         </label>
 
-        <label>
+        <label className="formDescription">
           Description
-            <textarea
-                name="description"
-                value={gastos.description}
-                onChange={(e) => handleInputChange(e)}
-            />
+                <textarea
+                    name="description"
+                    value={gastos.description}
+                    onChange={(e) => handleInputChange(e)}
+                />
         </label>
 
-        <label>
+        <label className=" formTotal">
           Total
-            <input
-                name="total"
-                value={gastos.total}
-                onChange={(e) => handleInputChange(e)}
-            />
+                <input
+                    name="total"
+                    value={gastos.total}
+                    onChange={(e) => handleInputChange(e)}
+                />
         </label>
 
-        <label>
+        <label className="formResponsable">
           Responsable pago
-          <select name="userId" onChange={handleInputChange} value={gastos.userId}>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          </select>
+                  <select name="userId" onChange={handleInputChange}
+                                               value={gastos.userId}>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  </select>
         </label>
 
         <button>Add</button>
       </form>
     </div>
+ 
   );
 }
 

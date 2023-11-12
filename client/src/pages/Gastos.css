@@ -1,0 +1,70 @@
+
+
+/* Estilos globales para todos los elementos */
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  /* border: 1px solid red; */
+
+/* Estilos para el elemento HTML y el cuerpo */
+} 
+html, body {
+  height: 100%;
+  width: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
+  font-family: "San Francisco", BlinkMacSystemFont, "Segoe UI", 
+  Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+/* Estilos para el elemento con la clase "caja" */
+.caja{
+   /* border: 1px solid grey; */
+   background: #f0eded;
+   font-family: "San Francisco", BlinkMacSystemFont, "Segoe UI", 
+   Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+
+/* Estilos para el contenedor flexible con la clase "flex-container" */
+.flex-container{
+  padding: 0px;
+  display:flex;
+  /* border: 1px solid black; */
+  /* flex-direction: row;
+  flex-wrap: wrap; */
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 auto;
+  align-items: flex-start;
+}
+
+
+/* Estilos para las cajas con las clases c1, c2, c3, y c4 */
+.c1{
+  background:#fcf2cb ;
+}
+.c2{
+  background:#fcf2cb;
+  order: 1;
+  flex-grow: 5;
+  text-decoration: none; /* no underline */
+}
+a.nolink {
+  color: inherit !important; /* blue colors for links too */
+  text-decoration: inherit !important; /* no underline */
+}
+
+.c3{
+  background:#fcf2cb ;
+  order: 2;
+  flex-grow: 2;
+}
+.c4{
+  background:#fcf2cb ;
+}

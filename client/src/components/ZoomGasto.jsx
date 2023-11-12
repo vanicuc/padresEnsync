@@ -3,44 +3,50 @@ import { useParams } from "react-router-dom";
 
 
 export default function ZoomGastos() {
-   
+
+      // Obtener el parámetro de la UR
     const { id } = useParams();
     const [detallesGasto, setDetallesGasto] = useState(null);
 
-
+     // Efecto para obtener detalles del gasto al cargar la página
     useEffect(() => {
-        const fetchGasto = async () => {
-            try {
-                const response = await fetch(`/api/gastos/${id}`, {
-                    method: "GET",
-            
-                });
-                // console.log("Detalles del Gasto:", data);
+        fetchGasto();   
+    }, [id]);
 
-                if (response.ok) {
-                    const data = await response.json();
-                    setDetallesGasto(data);
-                  } else {
-                    console.log(`Error del servidor: ${response.status} : ${response.statusText}`);
-                    throw new Error(`Error del servidor: ${response.status} : ${response.statusText}`);
-                  }
-                } catch (err) {
-                  console.log("Error al obtener detalles del gasto:", err);
+    async function fetchGasto() {
+        try {
+            // Hace una solicitud GET a la API 
+            //para obtener los detalles de un gasto específico
+            const response = await fetch(`/api/gastos/${id}`, {
+                method: "GET",
+        
+            });
+            // console.log("Detalles del Gasto:", data);
+
+            if (response.ok) {
+                const data = await response.json();
+                setDetallesGasto(data);
+                } else {
+                console.log(`Error del servidor: ${response.status} : ${response.statusText}`);
+                throw new Error(`Error del servidor: ${response.status} : ${response.statusText}`);
                 }
-        };
+            } catch (err) {
+                console.log("Error al obtener detalles del gasto:", err);
+            }
+    };
 
-        fetchGasto();
-    }, [id])
+       
 
-   
+   // Si no hay detalles, mostrar "Loading..."
     if (!detallesGasto) {
         return <div>Loading...</div>
     }
+    // Extraer detalles del gasto
     const {dateExpense, description, total, userId, approved} = detallesGasto;
 
 
 
-    
+    // Estructura del componente para mostrar detalles
     return (
     <>
         <div className="list-group mt-4 shadow">
