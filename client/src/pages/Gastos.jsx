@@ -1,13 +1,18 @@
+
+
+
 // Importación de estilos y bibliotecas:
 import './Gastos.css'
 import React from "react";
 import { useState, useEffect } from 'react'
 import GastosForm from "../components/gastosForm";
-import ZoomGastos from "../components/ZoomGasto";
+// import ZoomGastos from "../components/ZoomGasto";
 import { Outlet, useNavigate } from "react-router-dom";
 import {Link} from "react-router-dom";
 
 export default function GastosPage() {
+  // fecha
+  const [fechaActual, setFechaActual] = useState(new Date());
   // Estado local
   const [gastoConcreto, setGastoConcreto] = useState("");
   const [gastosData, setGastosData] = useState([]);
@@ -25,6 +30,23 @@ export default function GastosPage() {
   useEffect(() => {
     getGastosData();
   }, []);
+
+//efecto para la fecha
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setFechaActual(new Date());
+    }, 1000); // Actualiza la fecha cada segundo
+    // Limpia el intervalo al desmontar el componente
+    return () => clearInterval(intervalId); 
+  }, []); 
+
+  // Obtén los componentes de la fecha
+  const dia = fechaActual.getDate();
+  const mes = fechaActual.getMonth() + 1; // Ten en cuenta que los meses comienzan desde 0
+  const año = fechaActual.getFullYear();
+
+  // Formatea la fecha como xx/xx/xx
+  const fechaFormateada = `${dia}/${mes}/${año}`;
 
 
   //Obtener datos de gastos desde la API
@@ -72,8 +94,6 @@ export default function GastosPage() {
       };
 
 
-
-
   // Función para eliminar un gasto   
     const deleteGastos = async (id) => { 
       try {
@@ -100,41 +120,50 @@ export default function GastosPage() {
 // Estructura del componente
     return (
   <>
-  <div className='caja c1'> 
-    {/* <meta charSet="utf-8" /> */}
-    dia:xx/xx/xx custodia:xxxxx  Menor xxxx xxxxx 
+  <div className='caja BoxNombre' 
+  style={{ display: 'flex', justifyContent: 'space-between' }}> 
+ 
+  <div  style={{ flex: 1, textAlign: 'left' }}>
+        Día: {fechaFormateada} Custodia: xxxxx
+      </div>
+      <div style={{ flex: 1, textAlign: 'right' }}>
+        Menor: xxxxx xxxxx
+        </div>
+  </div>
+
+  <div  className="caja BoxForm">
+        Añadir Desglose Económico
+          <GastosForm  
+              onGastoAdded={getGastosData}
+              />
   </div>
 
   <section className='flex-container'>
-
-    <div className='caja c3'>Detalle
-      <Outlet ></Outlet>
-    </div>
-
-      <div className="caja c2" > Registro de Gastos
-
+   
+      <div className="caja BoxRegistro" > Registro de Gastos
           <ul className="list-group list-group-flush">
              <li className="list-group-item">
-
               {gastosData.map((gasto) => (
-                    <div  onClick={() => handlegastoClick(gasto.id)}
-                          //  className="list-group-item d-flex justify-content-between"
-                           className="list-group-item d-flex justify-content-between"
-                          key={gasto.id}>
-                        <div className="nolink" onClick={() => handlegastoClick(gasto.id)}>
-                            <Link to={`/gastos/${gasto.id}`}>
+                    <div 
+                     onClick={() => handlegastoClick(gasto.id)}  
+                    className="list-group-item d-flex justify-content-between"
+                    key={gasto.id}
+                      >
+                    <div className="nolink" onClick={() => handlegastoClick(gasto.id)}>
+                    <Link to={`/gastos/${gasto.id}`}  style={{ textDecoration: 'none', color: 'inherit' }}>
                                 {gasto.description}
-                              </Link>
+                      </Link>
                         </div> 
-                              <button
-                              className="btn btn-outline-secondary btn-sm"
-                                onClick={() => deleteGastos(gasto.id)} >
-                                          <i className="fa-solid fa-trash"></i>
-                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
-                                          fill="#808080" className="bi bi-trash3" viewBox="0 0 16 16">
-                                          <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
-                                          </svg>
-                              </button> 
+                        <button
+                          className="btn btn-outline-secondary btn-sm"
+                          onClick={() => deleteGastos(gasto.id)} 
+                          >
+                            <i className="fa-solid fa-trash"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
+                            fill="#808080" className="bi bi-trash3" viewBox="0 0 16 16">
+                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                            </svg>
+                          </button> 
                     </div>
                 ))
               }
@@ -142,14 +171,12 @@ export default function GastosPage() {
           </ul>
          </div>
     
-        </section>
-        <div  className="caja c4">
-        Añadir Desglose Económico
-          <GastosForm  
-              onGastoAdded={getGastosData}
-              />
-    </div>
+          <div className='caja BoxDetalle'>Detalle
+            <Outlet ></Outlet>
+          </div>
 
+    </section>
+  
   </>
   );
 };
@@ -157,102 +184,37 @@ export default function GastosPage() {
 
 
 
-  
-<div>
-{/* 
-  {gastoConcreto && (
-  <ZoomGastos 
-  
-    dateExpense={gastoConcreto.dateExpense}
-    description={gastoConcreto.description}
-    total={gastoConcreto.total}
-    userId={gastoConcreto.userId}
-    approved={gastoConcreto.approved}
-    id={gastoConcreto.id}
-    />
-)}   */}
-  
-  </div>
-
-  {/* <div>
-  Gastos
-  <div>
-    {gastoConcreto.map((gasto) => (
-      <div key={gasto.id}>
-        <Link to={`/Gastos/${gasto.id}`}>
-          {gasto.description} {gasto.total}
-        </Link>
-      </div>
-    ))}
-  </div> 
-  
-</div> */}
 
 
 
+// //para qye solo se vean 10 gastos
+// const [visibleGastos, setVisibleGastos] = useState(10);
+
+
+    
+//     const handleScroll = (e) => {
+//       const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+//       if (bottom) {
+//         setVisibleGastos((prevVisible) => prevVisible + 10);
+//       }
+//     };
 
 
 
+//     return (
+//   
 
+//  
+   
+//   <div className="caja BoxRegistro" style={{ maxHeight: '300px', overflowY: 'auto' }} onScroll={handleScroll}>
+//            Registro de Gastos
 
+//           <ul className="list-group list-group-flush">
 
-// <div className="list-group mt-4 shadow">
-// {Object.entries(gastoConcreto).map(([key, value]) => (
-//   <div key={key}>
-//     <strong>{key}:</strong> {value}
-//   </div>
-// ))}
-// </div>
+//              <li className="list-group-item">
 
+//              {gastosData.slice(0, visibleGastos).map((gasto) => (
+//                   
 
-
-
-
-
-
-
-// return (
-//   <>
-//   <body>
-//     <head> 
-//       <title>Hijo/a: Luca Sentis</title>
-//     </head>
-
-//         <div className="list-group mt-4 shadow">
-//           <conteiner>
-//               {gastosData.map((gasto) => (
-//               <div  onClick={() => handlegastoClick(gasto.id)}
-//                 className="list-group-item d-flex justify-content-between"
-//                 key={gasto.id}>
-//               <div onClick={() => handlegastoClick(gasto.id)}>
-//                 {gasto.description}
-//               </div> 
-//                           <button
-//                             className="btn btn-outline-danger btn-sm"
-//                             onClick={() => deleteGastos(gasto.id)} >
-//                                 <i className="fa-solid fa-trash"></i>
-//                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
-//                                 fill="currentColor" className="bi bi-trash3" viewBox="0 0 16 16">
-//                                 <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
-//                                 </svg>
-      
-//                           </button> 
-//               </div>
-//           ))
-//           }
-//           </conteiner>
-//         </div>
-//         <aside>
-//           <GastosForm  
-//               onGastoAdded={getGastosData}
-//               />
-//         </aside>
-//         <article></article>
-//         <footer></footer>
-//     </body>
-//   </>
-  
-//   );
-// };
 
 

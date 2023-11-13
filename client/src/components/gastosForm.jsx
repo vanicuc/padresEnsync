@@ -73,29 +73,35 @@ const addGastos = async () => {
     
     <div className="gastos-form-container">
       <form onSubmit={handleSubmit}>
+        
+        <label className="formDescription">
+          Description
+                <textarea
+                    name="description"
+                  
+                    // style={{ width: '100%', resize: 'vertical' }}
+                    value={gastos.description}
+                    onChange={(e) => handleInputChange(e)}
+                />
+        </label>
+        
         <label className=" formFecha">
           Fecha
                 <input
                     type="date"
                     name="dateExpense"
+                    
                     value={gastos.dateExpense}
                     onChange={(e) => handleInputChange(e)}
                 />
         </label>
 
-        <label className="formDescription">
-          Description
-                <textarea
-                    name="description"
-                    value={gastos.description}
-                    onChange={(e) => handleInputChange(e)}
-                />
-        </label>
 
         <label className=" formTotal">
           Total
                 <input
                     name="total"
+                    
                     value={gastos.total}
                     onChange={(e) => handleInputChange(e)}
                 />
@@ -110,11 +116,74 @@ const addGastos = async () => {
                   </select>
         </label>
 
-        <button>Add</button>
+        <button className="btn btn-grey">Add</button>
       </form>
     </div>
  
   );
+
+  
+  // return (
+  
+    
+  //     <form onSubmit={handleSubmit}>
+  //   <table>
+  //     <tr>
+  //       <td className="formDescription">
+  //         Description
+  //               <textarea
+  //                   name="description"
+  //                   value={gastos.description}
+  //                   onChange={(e) => handleInputChange(e)}
+  //               />
+  //       </td>
+  //       <td></td>
+  //     </tr>
+  //     <tr> 
+  //       <td className=" formFecha">
+  //         Fecha
+  //               <input
+  //                   type="date"
+  //                   name="dateExpense"
+  //                   value={gastos.dateExpense}
+  //                   onChange={(e) => handleInputChange(e)}
+  //               />
+  //       </td>
+  //       <td className=" formTotal">
+  //         Total
+  //               <input
+  //                   name="total"
+  //                   value={gastos.total}
+  //                   onChange={(e) => handleInputChange(e)}
+  //               />
+  //       </td>
+  //     </tr>
+
+  //     <tr> 
+
+
+      
+  //       <td className="formResponsable">
+  //         Responsable pago
+  //                 <select name="userId" onChange={handleInputChange}
+  //                                              value={gastos.userId}>
+  //                 <option value="1">1</option>
+  //                 <option value="2">2</option>
+  //                 </select>
+  //       </td>
+  //       <td>
+  //       <button className="btn btn-grey">Add</button>
+  //       </td>
+  //     </tr>
+  //   </table>
+  //     </form>
+ 
+  // );
+ 
 }
+ 
+
 
 export default GastosForm;
+
+

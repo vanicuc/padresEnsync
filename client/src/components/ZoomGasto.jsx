@@ -75,29 +75,3 @@ export default function ZoomGastos() {
 
 
 
-// / const [gastosData, setGastosData] = useState([]);
-    // // const [error, setError] = useState("");
-    // const { id } = useParams();
-   
-    // useEffect(() => {
-    //   GetZoomGastos();
-    // }, [id]);
- 
-    // const getEachGastosData = async (id) => {
-    //     try {
-    //       const response = await fetch(`/api/gastos/${id}`, {
-    //         method: "GET",
-    //       });
-      
-    //       if (response.ok) {
-    //         const gastoData = await response.json(); 
-    //         setGastosData(gastoData);
-    //         setError("");
-    //       } else {
-    //         console.log(`Error del servidor: ${response.status} : ${response.statusText}`);
-    //         throw new Error(`Error del servidor: ${response.status} : ${response.statusText}`);
-    //       }
-    //     } catch (err) {
-    //       setError(err.message);
-    //     }
-    //   };

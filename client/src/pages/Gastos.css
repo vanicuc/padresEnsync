@@ -16,7 +16,7 @@ html, body {
 body {
   margin: 0;
   padding: 0;
-  background-color: #f8f8f8;
+  background-color: white;
   font-family: "San Francisco", BlinkMacSystemFont, "Segoe UI", 
   Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
@@ -24,7 +24,7 @@ body {
 /* Estilos para el elemento con la clase "caja" */
 .caja{
    /* border: 1px solid grey; */
-   background: #f0eded;
+   /* background: #f0eded; */
    font-family: "San Francisco", BlinkMacSystemFont, "Segoe UI", 
    Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
@@ -34,9 +34,6 @@ body {
 .flex-container{
   padding: 0px;
   display:flex;
-  /* border: 1px solid black; */
-  /* flex-direction: row;
-  flex-wrap: wrap; */
   flex-flow: row wrap;
   justify-content: space-between;
   width: 100%;
@@ -46,25 +43,27 @@ body {
 
 
 /* Estilos para las cajas con las clases c1, c2, c3, y c4 */
-.c1{
+.BoxNombre{
   background:#fcf2cb ;
-}
-.c2{
-  background:#fcf2cb;
-  order: 1;
-  flex-grow: 5;
-  text-decoration: none; /* no underline */
-}
-a.nolink {
-  color: inherit !important; /* blue colors for links too */
-  text-decoration: inherit !important; /* no underline */
 }
 
-.c3{
-  background:#fcf2cb ;
-  order: 2;
-  flex-grow: 2;
+.BoxForm{
+  /* order: 1;
+  flex-grow: 5; */
+  background: #f8f8f8;
 }
-.c4{
-  background:#fcf2cb ;
+
+
+.BoxRegistro{
+  order: 1;
+  flex-grow:5;
+  margin: 0;
+}
+
+
+.BoxDetalle{
+  order: 2;
+  flex-grow: 1;
+  margin-left: 5px;
+  /* background: #f8f8f8; */
 }
