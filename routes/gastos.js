@@ -10,7 +10,7 @@ const gastoMustExist = require("../guards/gastoMustExist");
 router.get("/", async (req, res) => {
   // Send back the full list of items
   try {
-    const results = await db("SELECT * FROM gastos;");
+    const results = await db("SELECT * FROM gastos order by dateExpense desc;");
 const gastos = results.data;
 
     if (gastos.length > 0) {
@@ -80,6 +80,21 @@ router.post("/", async function(req, res) {
   }
 });
 
+router.put("/:id", gastoMustExist, async (req, res) => {
+  try {
+    const id = req.params.id;
+   
+      const updateApprovedQuery = `UPDATE gastos SET approved = !approved WHERE id = ${id}`;
+      await db(updateApprovedQuery);
+    
+
+    const updatedResults = await db(`SELECT * FROM gastos where id = ${id}`);
+    res.send(updatedResults.data[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err.message || "Error interno del servidor");
+  }
+});
 
 
 

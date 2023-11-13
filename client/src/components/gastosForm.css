@@ -1,4 +1,15 @@
 
+.gastos-form{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 250px);
+  row-gap: 300px;
+  margin: 20px;
+}
+.gastos-form div{
+  margin: 20px;
+}
+
+
 /* .gastos-form-container {
   background-color: #fff;
   padding: 20px;
@@ -11,7 +22,7 @@
   margin-bottom: 10px;
 }*/
 
-.gastos-form-container button {
+/* .gastos-form-container button {
   border: none;
   padding: 10px 15px;
   text-align: center;
@@ -27,7 +38,7 @@
 
 .gastos-form-container button:hover {
   background-color: #0056b3;
-} 
+}  */
 
 
 

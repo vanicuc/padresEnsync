@@ -26,6 +26,10 @@ export default function GastosPage() {
     
 });
 
+// //para qye solo se vean 10 gastos
+const [visibleGastos, setVisibleGastos] = useState(10);
+
+
 // Efecto para obtener datos de gastos al cargar la página
   useEffect(() => {
     getGastosData();
@@ -82,7 +86,7 @@ export default function GastosPage() {
             console.log(id);
             console.log(gastosData);
             setError("");
-            // ZoomGastos();
+       
 
           } else {
             console.log(`Error del servidor: ${response.status} : ${response.statusText}`);
@@ -117,6 +121,13 @@ export default function GastosPage() {
     };
     
 
+        const handleScroll = (e) => {
+      const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+      if (bottom) {
+        setVisibleGastos((prevVisible) => prevVisible + 10);
+      }
+    };
+
 // Estructura del componente
     return (
   <>
@@ -139,16 +150,22 @@ export default function GastosPage() {
   </div>
 
   <section className='flex-container'>
-   
+    {/* <div className="caja BoxRegistro"  onScroll={handleScroll}>
+           Registro de Gastos*/}
+
       <div className="caja BoxRegistro" > Registro de Gastos
+
           <ul className="list-group list-group-flush">
              <li className="list-group-item">
+         {/* {gastosData.slice(0, visibleGastos).map((gasto) => ( */}
               {gastosData.map((gasto) => (
                     <div 
                      onClick={() => handlegastoClick(gasto.id)}  
                     className="list-group-item d-flex justify-content-between"
                     key={gasto.id}
                       >
+                         {/* <div data-spy="scroll" class="scrollspy-example z-depth-1 mt-4" data-target="#list-group-item"
+      data-offset="0"></div> */}
                     <div className="nolink" onClick={() => handlegastoClick(gasto.id)}>
                     <Link to={`/gastos/${gasto.id}`}  style={{ textDecoration: 'none', color: 'inherit' }}>
                                 {gasto.description}
@@ -169,6 +186,7 @@ export default function GastosPage() {
               }
             </li >
           </ul>
+    
          </div>
     
           <div className='caja BoxDetalle'>Detalle

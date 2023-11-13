@@ -7,6 +7,7 @@ export default function ZoomGastos() {
       // Obtener el parámetro de la UR
     const { id } = useParams();
     const [detallesGasto, setDetallesGasto] = useState(null);
+    
 
      // Efecto para obtener detalles del gasto al cargar la página
     useEffect(() => {
@@ -35,8 +36,6 @@ export default function ZoomGastos() {
             }
     };
 
-       
-
    // Si no hay detalles, mostrar "Loading..."
     if (!detallesGasto) {
         return <div>Loading...</div>
@@ -44,6 +43,32 @@ export default function ZoomGastos() {
     // Extraer detalles del gasto
     const {dateExpense, description, total, userId, approved} = detallesGasto;
 
+    
+
+    const handleOnChange =async () => {
+
+        try {
+            // Hace una solicitud GET a la API 
+            //para obtener los detalles de un gasto específico
+            const response = await fetch(`/api/gastos/${id}`, {
+                method: "PUT",
+        
+            });
+            // console.log("Detalles del Gasto:", data);
+
+            if (response.ok) {
+                const data = await response.json();
+                setDetallesGasto(data);
+                } else {
+                console.log(`Error del servidor: ${response.status} : ${response.statusText}`);
+                throw new Error(`Error del servidor: ${response.status} : ${response.statusText}`);
+                }
+            } catch (err) {
+                console.log("Error al obtener detalles del gasto:", err);
+            }
+      };
+    
+   
 
 
     // Estructura del componente para mostrar detalles
@@ -58,9 +83,8 @@ export default function ZoomGastos() {
                 <p>Total = {total}</p>
                 <p>Responsable pago = {userId}</p>
                 <p>Aprovado
-                {/* {gastosData.approved} */}
-                <input type="checkbox" checked={approved} />
-                {/* <input type="checkbox" /> */}
+                <input type="checkbox"  id="approved" name="approved" checked={approved} onClick={handleOnChange}  />
+
                 </p>
             </div>
        
@@ -72,6 +96,7 @@ export default function ZoomGastos() {
 
     );
 };
+
 
 
 

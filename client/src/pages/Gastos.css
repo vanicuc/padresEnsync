@@ -47,11 +47,10 @@ body {
   background:#fcf2cb ;
 }
 
-.BoxForm{
-  /* order: 1;
-  flex-grow: 5; */
+/* .BoxForm{
+ 
   background: #f8f8f8;
-}
+} */
 
 
 .BoxRegistro{
@@ -67,3 +66,5 @@ body {
   margin-left: 5px;
   /* background: #f8f8f8; */
 }
+
+
