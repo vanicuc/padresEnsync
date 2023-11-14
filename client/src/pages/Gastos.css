@@ -41,16 +41,117 @@ body {
   align-items: flex-start;
 }
 
+#approved{
+ display: inline;
+ 
+
+}
 
 /* Estilos para las cajas con las clases c1, c2, c3, y c4 */
 .BoxNombre{
   background:#fcf2cb ;
+  height: 50px;
+  border-bottom-left-radius:15px;
+  border-bottom-right-radius:15px;
 }
 
-/* .BoxForm{
- 
+.BoxNombre div{
+padding: 10px;
+}
+
+
+
+.BoxRegistro{
+  
+  flex-grow:5;
+  margin: 0;
+}
+
+.BoxForm{
+  margin-top: 20px;
   background: #f8f8f8;
-} */
+  margin-left: 5px;
+  border: 1px solid darkgray;
+  border-radius: 15px;
+  
+  
+}
+
+.BoxDetalle{
+  margin-top: 20px;
+  margin-left: 5px;
+  background: #fcf2cb;
+  border: 1px solid#fcf2cb;
+  border-radius: 15px;
+ 
+}
+
+
+
+.barra_lateral{
+
+  gap: 20px;
+  order: 2;
+  flex-grow: 1.5;
+  
+  
+}
+
+
+form{
+  display: grid;
+  row-gap: 1em;
+  margin: 15px;
+  padding: 10px;
+  
+
+}
+
+
+
+textarea{
+  display: block;
+ 
+}
+
+input{
+display: block;
+align-items: center;
+}
+
+.formDescription{
+
+  align-items: center;
+  margin: auto;
+  
+  
+}
+
+.formFecha{
+ 
+  align-items: center;
+  margin: auto;
+  text-align: center;
+  
+}
+
+.formTotal{
+  align-items: center;
+  margin: auto;
+
+}
+
+
+
+
+/* Estilos para las cajas con las clases c1, c2, c3, y c4 */
+/* .BoxNombre{
+  background:#fcf2cb ;
+}
+
+.BoxForm{
+  background: #f8f8f8;
+}
 
 
 .BoxRegistro{
@@ -64,7 +165,12 @@ body {
   order: 2;
   flex-grow: 1;
   margin-left: 5px;
-  /* background: #f8f8f8; */
+  background: #f8f8f8;
+ 
 }
 
 
+#approved{
+ display: inline;
+
+} */

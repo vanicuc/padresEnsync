@@ -74,7 +74,7 @@ export default function ZoomGastos() {
     // Estructura del componente para mostrar detalles
     return (
     <>
-        <div className="list-group mt-4 shadow">
+        <div className="list-group mt-4">
 
         
             <div >
