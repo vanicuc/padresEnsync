@@ -20,18 +20,3 @@ CREATE TABLE gastos (
   approved tinyint(1),
   PRIMARY KEY (id)
 );
-
--- CREATE TABLE `lista`(
---     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
--- );
--- CREATE TABLE `calendario`(
---     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
--- );
--- CREATE TABLE `gastos_parentales`(
---     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
---     `data` DATE MOT NULL,
---     `description` VARCHAR(400) NOT NULL,
---     `TOTAL` INT NOT NULL,
---     `pay`  NOT NULL,
---     `approved` TINYINT
--- );

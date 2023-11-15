@@ -82,7 +82,7 @@ export default function ZoomGastos() {
                 <p>Descripción = {description}</p>
                 <p>Total = {total}</p>
                 <p>Responsable pago = {userId}</p>
-                <p>Aprovado
+                <p>Aprobado
                 <input type="checkbox"  id="approved" name="approved" checked={approved} onClick={handleOnChange}  />
 
                 </p>

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import './gastosForm.css'
 
 function GastosForm({onGastoAdded}) {
 
